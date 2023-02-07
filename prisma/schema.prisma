@@ -1,0 +1,70 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgres"
+  url      = env("DATABASE_URL")
+}
+
+
+model Usuario {
+  id           Int        @id @default(autoincrement())
+  nombre       String
+  dni          Int
+  telefono     Int
+  correo       String     @unique
+  contrasena     String
+  es_propietario    Boolean
+  restaurante Restaurante[]
+  @@map("usuarios")
+}
+
+model Restaurante {
+  id           Int        @id @default(autoincrement())
+  nombre       String
+  departamento  String
+  telefono      Int
+  referencia    String
+  distrito      String
+  provincia     String
+  usuario      Usuario?   @relation(fields: [usuarioId], references: [id])
+  usuarioId    Int?  
+  tipo          String
+  apertura      String 
+  cierre        String
+  fech_creacion String
+  calificacion  Float
+  descripcion   String
+  plato Plato[]
+  comentario Comentario[]
+  @@map("restaurantes")
+}
+
+
+model Plato {
+  id        Int      @id @default(autoincrement())
+  nombre_plato   String
+  precio   Float
+  imagen    String
+  disponibilidad Boolean  @default(true)
+  descripcion String
+  restaurante      Restaurante   @relation(fields: [restaurante_id], references: [id])
+  restaurante_id Int
+  @@map("platos")
+}
+
+
+model Comentario {
+  id        Int      @id @default(autoincrement())
+  comentario   String
+  calificacion  Int
+  
+  restaurante      Restaurante   @relation(fields: [restaurante_id], references: [id])
+  restaurante_id Int
+ @@map("comentarios")
+}
+
