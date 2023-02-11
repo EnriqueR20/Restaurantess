@@ -158,18 +158,10 @@ export const ActualiUsuario = async ( req: Request, res: Response ): Promise<voi
 
 /*cambiar el All Usuario*/
 export const AllUsuario = async (_req: Request, res: Response): Promise<void> => {
-  try {
-
-    /*cambiar el prisma.plato */
-    const allusuario = await prisma.usuario.findMany({
-
-      /*Todos los campos imagen:true,disponibilidad :true */
-      select: {
-        nombre:true,dni:true,telefono:true,correo:true,contrasena:true,es_propietario:true,
-      },
-    });
-    res.json(allusuario);
-  } catch (error) {
-    res.status(500).json({ message: error });
-  }
+try {
+  const allusuario = await prisma.usuario.findMany();
+  res.json({ ok: true, body: allusuario });
+} catch (error) {
+  res.status(500).json({ ok: false, body: error, message: "Server Error" });
+}
 };
