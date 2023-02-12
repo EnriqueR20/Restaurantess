@@ -73,7 +73,7 @@ Correr el proyecto
 | contrasena | `string` | 
 
 ### Resgitros y listas logueandose
-_Solo podra crear los campos y visualizarlos siempre y cuando este logueado el tipo de usaurio_
+_Solo podra crear los campos y visualizarlos siempre y cuando este logueado el tipo de usuario_
 
 ### Crear Restaurante
 
@@ -136,7 +136,7 @@ _Únicamente se mostrará los platos por restaurante_Id_
 ### Crear Comentario 
 
 ```
-  POST /api/v1/createplaylist
+  POST /api/v1/comentarios
 ```
 
 | Parameter | Type     |           
